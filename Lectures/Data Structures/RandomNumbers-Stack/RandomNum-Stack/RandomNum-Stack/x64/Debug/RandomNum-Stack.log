@@ -1,3 +1,0 @@
-﻿  RandomNum-Stack.cpp
-C:\Users\Ege\Desktop\CerahpasaAssignments\Computer-Eng-Assignments\Data Structures\RandomNumbers-Stack\RandomNum-Stack\RandomNum-Stack\RandomNum-Stack.cpp(32,12): warning C4244: 'bağımsız değişken': 'time_t' - 'unsigned int' dönüşümü; veri kaybı olabilir
-  RandomNum-Stack.vcxproj -> C:\Users\Ege\Desktop\CerahpasaAssignments\Computer-Eng-Assignments\Data Structures\RandomNumbers-Stack\RandomNum-Stack\x64\Debug\RandomNum-Stack.exe
