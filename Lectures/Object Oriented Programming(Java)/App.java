@@ -1,3 +1,4 @@
+
 import java.util.Scanner;
 
 public class App {
@@ -7,82 +8,65 @@ public class App {
         Yamuk[] yamuklar = new Yamuk[10];
         Paralelkenar[] paralelkenarlar = new Paralelkenar[10];
 
-        Scanner s = new Scanner(System.in);
         String dortgen;
-        System.out.println("Sekil ismi giriniz(kare,dikdortgen,yamuk,paralelkenar)");
-
-        dortgen = s.nextLine();
-        int i = 0;
         Nokta a, b, c, d;
+        Scanner s = new Scanner(System.in);
         int checkExit = 1;
-        switch (dortgen) {
-            case "kare":
-                while (checkExit == 1 && i < 10) {
-                    System.out.println("Noktalari giriniz");
-                    a = new Nokta(s.nextInt(), s.nextInt());
-                    b = new Nokta(s.nextInt(), s.nextInt());
-                    c = new Nokta(s.nextInt(), s.nextInt());
-                    d = new Nokta(s.nextInt(), s.nextInt());
-                    kareler[i] = new Kare(a, b, c, d);
-                    System.out.println(i + 1 + ". karenin alani: " + kareler[i].Alan());
-                    i++;
-                    System.out.println("eklemeye devam etmek icin 1,cikis yapmak icin 0 yazin");
-                    checkExit = s.nextInt();
-                }
-                System.out.println("cikis yapildi");
-                break;
-            case "dikdortgen":
-                while (checkExit == 1 && i < 10) {
-                    System.out.println("Noktalari giriniz");
-                    a = new Nokta(s.nextInt(), s.nextInt());
-                    b = new Nokta(s.nextInt(), s.nextInt());
-                    c = new Nokta(s.nextInt(), s.nextInt());
-                    d = new Nokta(s.nextInt(), s.nextInt());
-                    dikdortgenler[i] = new Dikdortgen(a, b, c, d);
-                    System.out.println(i + 1 + ". dikdortgenin alani: " + dikdortgenler[i].Alan());
-                    i++;
-                    checkExit = s.nextInt();
-                    System.out.println("eklemeye devam etmek icin devam,cikis yapmak icin cikis yazin");
+        while (checkExit == 1) {
 
-                }
-                System.out.println("cikis yapildi");
-                break;
-            case "yamuk":
-                while (checkExit == 1 && i < 10) {
-                    System.out.println("Noktalari giriniz");
-                    a = new Nokta(s.nextInt(), s.nextInt());
-                    b = new Nokta(s.nextInt(), s.nextInt());
-                    c = new Nokta(s.nextInt(), s.nextInt());
-                    d = new Nokta(s.nextInt(), s.nextInt());
-                    yamuklar[i] = new Yamuk(a, b, c, d);
-                    System.out.println(i + 1 + ". yamugun alani: " + yamuklar[i].Alan());
-                    i++;
-                    System.out.println("eklemeye devam etmek icin devam,cikis yapmak icin cikis yazin");
-                    checkExit = s.nextInt();
-                }
-                System.out.println("cikis yapildi");
-                break;
-            case "paralelkenar":
-                while (checkExit == 1 && i < 10) {
-                    System.out.println("Noktalari giriniz");
-                    a = new Nokta(s.nextInt(), s.nextInt());
-                    b = new Nokta(s.nextInt(), s.nextInt());
-                    c = new Nokta(s.nextInt(), s.nextInt());
-                    d = new Nokta(s.nextInt(), s.nextInt());
-                    paralelkenarlar[i] = new Paralelkenar(a, b, c, d);
-                    System.out.println(i + 1 + ". paralelkenarin alani: " + paralelkenarlar[i].Alan());
-                    i++;
-                    System.out.println("eklemeye devam etmek icin devam,cikis yapmak icin cikis yazin");
-                    checkExit = s.nextInt();
-                }
-                System.out.println("cikis yapildi");
-                break;
-            default:
-                System.out.println("Programdan Çıkış yapıldı");
-                break;
+            System.out.println("Sekil ismi giriniz(kare,dikdortgen,yamuk,paralelkenar)");
+            dortgen = s.next();
+            System.out.println("1. Noktayı giriniz(x,y)");
+            a = new Nokta(s.nextInt(), s.nextInt());
+            System.out.println("2. Noktayı giriniz(x,y)");
+            b = new Nokta(s.nextInt(), s.nextInt());
+            System.out.println("3. Noktayı giriniz(x,y)");
+            c = new Nokta(s.nextInt(), s.nextInt());
+            System.out.println("4. Noktayı giriniz(x,y)");
+            d = new Nokta(s.nextInt(), s.nextInt());
+            switch (dortgen) {
+                case "kare":
+                    kareler[findNextShape(kareler)] = new Kare(a, b, c, d);
+                    break;
+                case "dikdortgen":
+                    dikdortgenler[findNextShape(dikdortgenler)] = new Dikdortgen(a, b, c, d);
+                    break;
+                case "yamuk":
+                    yamuklar[findNextShape(yamuklar)] = new Yamuk(a, b, c, d);
+                    break;
+                case "paralelkenar":
+                    paralelkenarlar[findNextShape(yamuklar)] = new Paralelkenar(a, b, c, d);
+                    break;
+                default:
+                    System.out.println("Geçersiz şekil ismi");
+                    break;
+
+            }
+            System.out.println("eklemeye devam etmek icin 1,cikis yapmak icin 0 yazin");
+            checkExit = s.nextInt();
 
         }
+
+        for (int x = 0; x < 10; x++) {
+            if (kareler[x] != null)
+                System.out.println(x + 1 + ". karenin alanı: " + kareler[x].Alan());
+            if (dikdortgenler[x] != null)
+                System.out.println(x + 1 + ". dikdortgenin alanı: " + dikdortgenler[x].Alan());
+            if (yamuklar[x] != null)
+                System.out.println(x + 1 + ". yamuğun alanı: " + yamuklar[x].Alan());
+            if (paralelkenarlar[x] != null)
+                System.out.println(x + 1 + ". paralelkenarın alanı: " + paralelkenarlar[x].Alan());
+        }
         s.close();
+
+    }
+
+    public static int findNextShape(Dortgen dortgen[]) {
+        for (int i = 0; i < dortgen.length; i++) {
+            if (dortgen[i] == null)
+                return i;
+        }
+        return dortgen.length - 1;
 
     }
 
